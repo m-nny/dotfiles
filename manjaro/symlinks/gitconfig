@@ -1,0 +1,20 @@
+[core]
+	editor = vim
+	excludesfile = ~/.cvsignore
+	ignorecase = false
+  # Enable parallel I/O for operations like "git diff".
+  preloadindex = true
+	autocrlf = input
+[push]
+	default = current
+[color]
+	ui = auto
+[include]
+	path = ~/.gitconfig.local
+[user]
+	name = Alibek Manabayev
+	email = m-nny@yandex.ru
+	github = m-nny
+[credential]
+[pull]
+	ff = only
