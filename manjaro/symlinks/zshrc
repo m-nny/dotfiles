@@ -34,3 +34,32 @@ source /usr/share/nvm/init-nvm.sh
 
 source $HOME/.zshrc.d/alises.zsh
 source $HOME/.zshrc.d/functions.zsh
+source $HOME/.zshrc.d/plugins.zsh
+
+# The next line updates PATH for Yandex Cloud CLI.
+if [ -f '/home/aero/yandex-cloud/path.bash.inc' ]; then source '/home/aero/yandex-cloud/path.bash.inc'; fi
+
+# The next line enables shell command completion for yc.
+if [ -f '/home/aero/yandex-cloud/completion.zsh.inc' ]; then source '/home/aero/yandex-cloud/completion.zsh.inc'; fi
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+source /home/aero/yandex-cloud/completion.zsh.inc
+
+export PATH="$(yarn global bin):$PATH"
+
+eval $(keychain --eval --quiet id_ed25519)
