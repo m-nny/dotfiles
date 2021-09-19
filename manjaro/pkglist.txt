@@ -6,7 +6,6 @@ ctop
 docker
 docker-compose
 git
-gitkraken
 google-chrome
 htop
 httpie
@@ -18,17 +17,16 @@ kitti3
 kitty
 kubectl
 less
-miniconda3
 neovim
 nvidia-container-toolkit
 rcm
+redshift-gtk-git
 rsync
-spotify
+selectdefaultapplication-git
 telegram-desktop
 tmux
 tree
 unzip
-visual-studio-code-insiders-bin
 wget
 xclip
 zip
