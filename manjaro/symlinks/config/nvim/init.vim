@@ -12,6 +12,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
 
+" might delete later
+Plug 'gennaro-tedesco/nvim-jqx'
+
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 

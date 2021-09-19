@@ -1,6 +1,7 @@
 
-noremap <leader>nn :NERDTreeFocus<CR>
-noremap <leader>nf :NERDTreeFind<CR>
+"noremap <leader>nf :NERDTreeFocus<CR>
+"noremap <leader>nn :NERDTreeFind<CR>
+noremap <leader>n :NERDTreeFind<CR>
 noremap <C-n> :NERDTreeToggle<CR>
 
 let g:NERDTreeIgnore = ['^node_modules$']
