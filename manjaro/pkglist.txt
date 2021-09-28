@@ -5,6 +5,7 @@ autotiling
 ctop
 docker
 docker-compose
+gcc
 git
 google-chrome
 htop
@@ -30,3 +31,4 @@ unzip
 wget
 xclip
 zip
+nvm
