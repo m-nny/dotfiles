@@ -58,6 +58,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# export PATH="$(yarn global bin):$PATH"
+export PATH="$(yarn global bin):$PATH"
 
-# eval $(keychain --eval --quiet id_ed25519)
+eval $(keychain --eval --quiet id_ed25519)

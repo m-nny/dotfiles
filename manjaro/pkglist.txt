@@ -5,6 +5,7 @@ autotiling
 ctop
 docker
 docker-compose
+fd
 gcc
 git
 google-chrome
@@ -20,6 +21,7 @@ kubectl
 less
 neovim
 nvidia-container-toolkit
+nvm
 rcm
 redshift-gtk-git
 rsync
@@ -31,4 +33,3 @@ unzip
 wget
 xclip
 zip
-nvm

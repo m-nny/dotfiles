@@ -9,11 +9,18 @@ Plug 'sheerun/vim-polyglot'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'eslint/eslint'
+
 Plug 'preservim/nerdtree'
+"Plug 'jistr/vim-nerdtree-tabs'
+Plug 'xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'preservim/nerdcommenter'
+Plug 'PhilRunninger/nerdtree-visual-selection'
 
 " might delete later
-Plug 'gennaro-tedesco/nvim-jqx'
+"Plug 'gennaro-tedesco/nvim-jqx'
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'

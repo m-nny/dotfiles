@@ -15,6 +15,8 @@ autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTa
 
 
 
+let g:NERDTreeWinSize=50
+
 "" Check if NERDTree is open or active
 "function! IsNERDTreeOpen()        
   "return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
@@ -32,3 +34,6 @@ autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTa
 "" Highlight currently open buffer in NERDTree
 "autocmd BufEnter * call SyncTree()
 
+
+" How to show Clean indicator?
+" let g:NERDTreeGitStatusShowClean = 1 " default: 0
