@@ -16,8 +16,14 @@ Plug 'preservim/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'preservim/nerdcommenter'
 Plug 'PhilRunninger/nerdtree-visual-selection'
+Plug 'preservim/nerdcommenter'
+
+Plug 'thaerkh/vim-workspace'
+
+Plug 'voldikss/vim-floaterm'
+
+"Plug 'kamykn/spelunker.vim'
 
 " might delete later
 "Plug 'gennaro-tedesco/nvim-jqx'
@@ -32,6 +38,8 @@ call plug#end()
 
 syntax on
 set mouse=a
+
+set noswapfile
 
 " Spaces & Tabs
 set tabstop=2
@@ -65,18 +73,33 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
+
+set splitbelow
+
+" terminal
+tnoremap <C-\><Esc> <C-\><C-n>
+nnoremap <C-\>t :T<cr>
+
+command! -nargs=* T split | terminal <args>
+command! -nargs=* VT vsplit | terminal <args>
+
+
 " Plugins' settings
 
-source ~/.config/nvim/plugins/which-key.vim
-
-source ~/.config/nvim/plugins/gruvbox.vim
-source ~/.config/nvim/plugins/polyglot.vim
 source ~/.config/nvim/plugins/coc.vim
 
+source ~/.config/nvim/plugins/fzf.vim
+
+source ~/.config/nvim/plugins/gruvbox.vim
+
+source ~/.config/nvim/plugins/motion.vim
 
 source ~/.config/nvim/plugins/nerd-commenter.vim
 source ~/.config/nvim/plugins/nerd-tree.vim
 
-source ~/.config/nvim/plugins/fzf.vim
+source ~/.config/nvim/plugins/polyglot.vim
 
-source ~/.config/nvim/plugins/motion.vim
+source ~/.config/nvim/plugins/which-key.vim
+
+source ~/.config/nvim/plugins/workspace.vim
+

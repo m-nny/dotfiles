@@ -1,4 +1,5 @@
 {
   "languageserver": {},
-  "coc.preferences.formatOnSaveFiletypes": ["typescript", "javascripts", "json", "css", "typescriptreact"]
+  "coc.preferences.formatOnSaveFiletypes": ["typescript", "javascripts", "json", "css", "typescriptreact"],
+  "eslint.packageManager": "yarn"
 }
