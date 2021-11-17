@@ -23,16 +23,15 @@ Plug 'thaerkh/vim-workspace'
 
 Plug 'voldikss/vim-floaterm'
 
-"Plug 'kamykn/spelunker.vim'
-
-" might delete later
-"Plug 'gennaro-tedesco/nvim-jqx'
-
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
 Plug 'bkad/camelcasemotion'
 Plug 'phaazon/hop.nvim'
+
+Plug 'airblade/vim-gitgutter'
+
+Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
@@ -73,6 +72,16 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
+" " delete without yanking
+" nnoremap <leader>d _d
+" vnoremap <leader>d _d
+
+" replace currently selected text with default register
+" without yanking it
+vnoremap p "_dP
+
+noremap <leader>h :noh<cr>
+
 
 set splitbelow
 
@@ -85,6 +94,7 @@ command! -nargs=* VT vsplit | terminal <args>
 
 
 " Plugins' settings
+source ~/.config/nvim/plugins/airline.vim
 
 source ~/.config/nvim/plugins/coc.vim
 
@@ -102,4 +112,5 @@ source ~/.config/nvim/plugins/polyglot.vim
 source ~/.config/nvim/plugins/which-key.vim
 
 source ~/.config/nvim/plugins/workspace.vim
+
 

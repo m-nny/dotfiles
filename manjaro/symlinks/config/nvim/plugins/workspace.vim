@@ -5,5 +5,6 @@ let g:workspace_autosave_untrailspaces = 0
 let g:workspace_autosave_untrailtabs = 0
 let g:workspace_autosave_ignore = ['gitcommit', 'qf', 'nerdtree', 'tagbar']
 let g:workspace_session_name = '.session.vim'
+set sessionoptions-=blank
 
-nnoremap <leader>s :ToggleWorkspace<CR>
+nnoremap <leader><leader>s :ToggleWorkspace<CR>
