@@ -35,7 +35,9 @@ source $HOME/.zshrc.d/alises.zsh
 source $HOME/.zshrc.d/functions.zsh
 source $HOME/.zshrc.d/plugins.zsh
 
-export PATH="$(yarn global bin):$PATH"
+if type yarn > /dev/null; then
+  export PATH="$(yarn global bin):$PATH"
+fi
 
 #eval $(keychain --eval --quiet id_ed25519)
 
