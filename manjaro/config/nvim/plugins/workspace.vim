@@ -7,4 +7,4 @@ let g:workspace_autosave_ignore = ['gitcommit', 'qf', 'nerdtree', 'tagbar']
 let g:workspace_session_name = '.session.vim'
 set sessionoptions-=blank
 
-nnoremap <leader><leader>s :ToggleWorkspace<CR>
+nnoremap <leader>s :ToggleWorkspace<CR>
