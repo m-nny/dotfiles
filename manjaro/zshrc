@@ -46,7 +46,9 @@ if [ -f '/home/m-nny/yandex-cloud/path.bash.inc' ]; then source '/home/m-nny/yan
 
 # The next line enables shell command completion for yc.
 if [ -f '/home/m-nny/yandex-cloud/completion.zsh.inc' ]; then source '/home/m-nny/yandex-cloud/completion.zsh.inc'; fi
+if [ -f '/opt/google-cloud-sdk/completion.zsh.inc' ]; then source '/opt/google-cloud-sdk/completion.zsh.inc'; fi
 
 
 if [ -f '/home/m-nny/.local/bin/terraform' ]; then complete -o nospace -C /home/m-nny/.local/bin/terraform terraform; fi
+
 
