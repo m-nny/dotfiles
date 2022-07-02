@@ -1,0 +1,17 @@
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+
+brew "aria2"
+brew "git"
+brew "htop"
+brew "jq"
+brew "neovim"
+brew "nvm"
+brew "rcm"
+brew "rsync"
+brew "tmux"
+brew "zsh"
+
+cask "kitty"
+cask "spotify"
