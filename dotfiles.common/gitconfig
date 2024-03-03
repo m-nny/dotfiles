@@ -1,0 +1,10 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Alibek Manabayev
+	email = m-nny@yandex.ru
+[push]
+	default = current
+[init]
+	defaultBranch = main
+[core]
+	editor = vim

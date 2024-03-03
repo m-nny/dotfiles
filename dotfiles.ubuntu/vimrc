@@ -1,0 +1,79 @@
+call plug#begin()
+
+Plug 'tpope/vim-surround'
+Plug 'liuchengxu/vim-which-key'
+
+Plug 'sheerun/vim-polyglot'
+
+Plug 'bkad/camelcasemotion'
+
+Plug 'airblade/vim-gitgutter'
+
+Plug 'vim-airline/vim-airline'
+
+Plug 'morhetz/gruvbox'
+
+call plug#end()
+
+set mouse=a
+
+set noswapfile
+
+" Spaces & Tabs
+set tabstop=2
+set expandtab
+set softtabstop=2
+set shiftwidth=2
+" set autoindent
+
+" UI layout
+set number
+set showcmd
+set wildmenu
+
+" Folding
+" set foldmethod=indent
+" set foldenable
+
+" Scroll
+set scrolloff=12
+
+
+" Tab navigation
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
+" " delete without yanking
+" nnoremap <leader>d _d
+" vnoremap <leader>d _d
+
+" replace currently selected text with default register
+" without yanking it
+vnoremap p "_dP
+
+noremap <leader>h :noh<cr>
+
+
+set splitbelow
+
+" terminal
+tnoremap <C-\><Esc> <C-\><C-n>
+nnoremap <C-\>t :T<cr>
+
+command! -nargs=* T split | terminal <args>
+command! -nargs=* VT vsplit | terminal <args>
+
+source ~/.vimrc.d/gruvbox.vim
+
+source ~/.vimrc.d/motion.vim
+
+source ~/.vimrc.d/polyglot.vim
+
