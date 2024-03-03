@@ -9,3 +9,5 @@ function load_dotenv() {
     echo "File ${DOTFILE} does not exists"
   fi
 }
+
+tcc() { tmux -CC new-session -A -s main; }
