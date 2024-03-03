@@ -1,1 +1,1 @@
-DOTFILES_DIRS=$HOME/.dotfiles/dotfiles.m1
+DOTFILES_DIRS="$HOME/.dotfiles/dotfiles.m1 $HOME/.dotfiles/dotfiles.common"
