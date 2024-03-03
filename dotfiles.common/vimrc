@@ -15,6 +15,11 @@ Plug 'morhetz/gruvbox'
 
 call plug#end()
 
+" VIM italics fix for mac
+" https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6?permalink_comment_id=4753385#gistcomment-4753385
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+
 set mouse=a
 
 set noswapfile
