@@ -1,7 +1,6 @@
 -- Set <space> as the leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
 
@@ -46,7 +45,7 @@ vim.opt.timeoutlen = 300
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
-vim.opt.splitbelow = false
+vim.opt.splitbelow = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
@@ -63,6 +62,9 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 20
 
+-- Set tab width
+vim.opt.tabstop = 2
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -73,7 +75,7 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+vim.keymap.set("n", "<leader>E", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -83,6 +85,9 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 
 -- Yank to clipboard selected text
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to clipboard selected text" })
+
+-- Open file explorer
+vim.keymap.set("n", "<leader>e", ":Ex<CR>", { desc = "Open file [E]xplorer" })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -178,15 +183,11 @@ require("lazy").setup({
 		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			{ -- If encountering errors, see telescope-fzf-native README for installation instructions
+			{
 				"nvim-telescope/telescope-fzf-native.nvim",
 
-				-- `build` is used to run some command when the plugin is installed/updated.
-				-- This is only run then, not every time Neovim starts up.
 				build = "make",
 
-				-- `cond` is a condition used to determine whether this plugin should be
-				-- installed and loaded.
 				cond = function()
 					return vim.fn.executable("make") == 1
 				end,
@@ -197,37 +198,10 @@ require("lazy").setup({
 			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 		},
 		config = function()
-			-- Telescope is a fuzzy finder that comes with a lot of different things that
-			-- it can fuzzy find! It's more than just a "file finder", it can search
-			-- many different aspects of Neovim, your workspace, LSP, and more!
-			--
-			-- The easiest way to use Telescope, is to start by doing something like:
-			--  :Telescope help_tags
-			--
-			-- After running this command, a window will open up and you're able to
-			-- type in the prompt window. You'll see a list of `help_tags` options and
-			-- a corresponding preview of the help.
-			--
-			-- Two important keymaps to use while in Telescope are:
-			--  - Insert mode: <c-/>
-			--  - Normal mode: ?
-			--
-			-- This opens a window that shows you all of the keymaps for the current
-			-- Telescope picker. This is really useful to discover what Telescope can
-			-- do as well as how to actually do it!
-
-			-- [[ Configure Telescope ]]
-			-- See `:help telescope` and `:help telescope.setup()`
 			require("telescope").setup({
-				-- You can put your default mappings / updates / etc. in here
-				--  All the info you're looking for is in `:help telescope.setup()`
-				--
-				-- defaults = {
-				--   mappings = {
-				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-				--   },
-				-- },
-				-- pickers = {}
+				defaults = {
+					layout_strategy = "vertical",
+				},
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
@@ -254,14 +228,13 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
 			-- Slightly advanced example of overriding default behavior and theme
-			vim.keymap.set("n", "<leader>/", function()
-				-- You can pass additional configuration to Telescope to change the theme, layout, etc.
-				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-					winblend = 10,
-					previewer = false,
-				}))
-			end, { desc = "[/] Fuzzily search in current buffer" })
-
+			vim.keymap.set(
+				"n",
+				"<leader>/",
+				builtin.current_buffer_fuzzy_find,
+				{ desc = "[/] Fuzzily search in current buffer" }
+			)
+			--
 			-- It's also possible to pass additional configuration options.
 			--  See `:help telescope.builtin.live_grep()` for information about particular keys
 			vim.keymap.set("n", "<leader>s/", function()
@@ -273,7 +246,7 @@ require("lazy").setup({
 
 			-- Shortcut for searching your Neovim configuration files
 			vim.keymap.set("n", "<leader>sn", function()
-				builtin.find_files({ cwd = vim.fn.stdpath("config") })
+				builtin.find_files({ cwd = vim.fn.stdpath("config"), follow = true })
 			end, { desc = "[S]earch [N]eovim files" })
 		end,
 	},
@@ -378,6 +351,10 @@ require("lazy").setup({
 			--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+			capabilities.textDocument.foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true,
+			}
 
 			-- Enable the following language servers
 			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -389,30 +366,14 @@ require("lazy").setup({
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
-				-- clangd = {},
 				gopls = {},
-				-- pyright = {},
-				-- rust_analyzer = {},
-				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-				--
-				-- Some languages (like typescript) have entire language plugins that can be useful:
-				--    https://github.com/pmizio/typescript-tools.nvim
-				--
-				-- But for many setups, the LSP (`tsserver`) will work just fine
-				-- tsserver = {},
-				--
 
 				lua_ls = {
-					-- cmd = {...},
-					-- filetypes = { ...},
-					-- capabilities = {},
 					settings = {
 						Lua = {
 							completion = {
 								callSnippet = "Replace",
 							},
-							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-							-- diagnostics = { disable = { 'missing-fields' } },
 						},
 					},
 				},
@@ -541,6 +502,31 @@ require("lazy").setup({
 				--
 				-- No, but seriously. Please read `:help ins-completion`, it is really good!
 				mapping = cmp.mapping.preset.insert({
+					["<Tab>"] = cmp.mapping(function(fallback)
+						-- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
+						if cmp.visible() then
+							local entry = cmp.get_selected_entry()
+							if not entry then
+								cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+							end
+							cmp.confirm()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+					["<CR>"] = cmp.mapping(function(fallback)
+						-- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
+						if cmp.visible() then
+							local entry = cmp.get_selected_entry()
+							if not entry then
+								cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+							end
+							cmp.confirm()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+
 					-- Select the [n]ext item
 					["<C-n>"] = cmp.mapping.select_next_item(),
 					-- Select the [p]revious item
@@ -630,11 +616,13 @@ require("lazy").setup({
 
 			-- Add/delete/replace surroundings (brackets, quotes, etc.)
 			--
-			-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-			-- - sd'   - [S]urround [D]elete [']quotes
-			-- - sr)'  - [S]urround [R]eplace [)] [']
 			require("mini.surround").setup({
-				replace = "sc",
+				-- match surround mapping to VSCodeVim
+				mappings = {
+					add = "S",
+					delete = "ds",
+					replace = "cs",
+				},
 			})
 
 			-- Simple and easy statusline.
@@ -684,6 +672,28 @@ require("lazy").setup({
 			--    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
 			--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
 			--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+		end,
+	},
+
+	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = { "kevinhwang91/promise-async" },
+		config = function()
+			-- nvim-ufo
+			vim.o.foldcolumn = "0" -- '0' is not bad
+			vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+			vim.o.foldlevelstart = 99
+			vim.o.foldenable = true
+
+			vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+			vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+
+			local ufo = require("ufo")
+			ufo.setup({
+				provider_selector = function(bufnr, filetype, buftype)
+					return { "lsp", "indent" }
+				end,
+			})
 		end,
 	},
 
