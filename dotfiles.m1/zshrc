@@ -16,7 +16,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 
 pluings=(python yarn docker)
-plugins+=(fzf kubectl)
+plugins+=(fzf)
 plugins+=(zsh-autosuggestions)
 
 
