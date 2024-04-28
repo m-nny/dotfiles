@@ -7,6 +7,8 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 
+		"nvim-lua/plenary.nvim",
+
 		-- Useful status updates for LSP.
 		{ "j-hui/fidget.nvim", opts = {} },
 
@@ -60,6 +62,7 @@ return {
 				-- Execute a code action, usually your cursor needs to be on top of an error
 				-- or a suggestion from your LSP for this to activate.
 				map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+				map("<C-.>", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
 				-- Opens a popup that displays documentation about the word under your cursor
 				--  See `:help K` for why this keymap.
@@ -100,6 +103,11 @@ return {
 			lineFoldingOnly = true,
 		}
 
+		-- local lazy_libs = vim.fn.split(vim.fn.globpath("~/.local/share/nvim/lazy/", "**/lua"), "\n")
+		local lazy_libs = {
+			vim.fn.expand("~/.local/share/nvim/lazy/telescope.nvim/lua"),
+			vim.fn.expand("~/.local/share/nvim/lazy/plenary.nvim/lua"),
+		}
 		-- Enable the following language servers
 		--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 		--
@@ -118,9 +126,13 @@ return {
 						completion = {
 							callSnippet = "Replace",
 						},
+						workspace = {
+							library = lazy_libs,
+						},
 					},
 				},
 			},
+			bufls = {},
 		}
 
 		-- Ensure the servers and tools above are installed
