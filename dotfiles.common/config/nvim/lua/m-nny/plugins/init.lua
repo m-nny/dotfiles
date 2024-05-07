@@ -3,7 +3,17 @@ return {
 	"tpope/vim-sleuth",
 
 	-- "gc" to comment visual regions/lines
-	{ "numToStr/Comment.nvim", opts = {} },
+	{
+		"numToStr/Comment.nvim",
+		opts = {
+			toggler = {
+				line = "<C-/>",
+			},
+			opleader = {
+				line = "<C-/>",
+			},
+		},
+	},
 
 	-- Adds git related signs to the gutter, as well as utilities for managing changes
 	{

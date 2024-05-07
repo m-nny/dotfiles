@@ -35,6 +35,7 @@ return {
 				},
 			},
 			pickers = {
+				live_grep = { additional_args = { "--follow" } },
 				find_files = { follow = true },
 				lsp_definitions = { fname_width = 80 },
 				lsp_implementations = { fname_width = 80 },
